@@ -1,0 +1,4 @@
+/gps/particle ion
+/gps/ion 95 241
+/gps/pos/centre 0 0 -20 cm
+/run/beamOn 10000
