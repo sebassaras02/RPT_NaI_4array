@@ -1,5 +1,0 @@
-/gps/particle gamma
-/gps/energy 662 keV
-/gps/pos/centre 0 0 -20 cm
-/gps/ang/type iso
-/run/beamOn 100000

@@ -1,4 +1,0 @@
-/home/sebas/Documents/code_g4/NaInew_RPT/build/CMakeFiles/rebuild_cache.dir
-/home/sebas/Documents/code_g4/NaInew_RPT/build/CMakeFiles/edit_cache.dir
-/home/sebas/Documents/code_g4/NaInew_RPT/build/CMakeFiles/NaInew.dir
-/home/sebas/Documents/code_g4/NaInew_RPT/build/CMakeFiles/naidetector.dir
