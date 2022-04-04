@@ -2,12 +2,13 @@
 #include "G4SystemOfUnits.hh"
 
 // initialize constructor
-eventaction::eventaction(runaction*){
+eventaction::eventaction(runaction* runAction){
     // create variable 
     fEdep1=0.;
     fEdep2=0.;
     fEdep3=0.;
     fEdep4=0.;
+    fRunAction=runAction;
 }
 // initialize destructor
 eventaction::~eventaction(){}
@@ -30,6 +31,7 @@ void eventaction::EndOfEventAction(const G4Event*){
     if (fEdep1>0.0*MeV){
         man->FillNtupleDColumn(0,0,fEdep1);
         man->AddNtupleRow(0);
+        fRunAction->AddEventEdep(fEdep1);
     }
     
     if (fEdep2>0.0*MeV){

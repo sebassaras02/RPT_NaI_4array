@@ -8,10 +8,12 @@
 #include "G4AnalysisManager.hh"
 #include "runaction.hh"
 
+class runaction;
+
 class eventaction : public G4UserEventAction 
 {
 public:
-    eventaction(runaction*);
+    eventaction(runaction* runAction);
     ~eventaction();
     
     // call necessary methods
@@ -26,6 +28,8 @@ public:
     
     private:
     G4double fEdep1, fEdep2, fEdep3, fEdep4;
+
+    runaction* fRunAction = nullptr;
 };
 
 #endif
