@@ -36,6 +36,10 @@ void runaction::BeginOfRunAction(const G4Run* run){
     man->CreateNtuple("Detector_4","Edep");
     man->CreateNtupleDColumn("fedep4");
     man->FinishNtuple(3);
+
+    man->CreateNtuple("Detector_1_time","TOF");
+    man->CreateNtupleDColumn("TOF1");
+    man->FinishNtuple(4);
    
     
 }

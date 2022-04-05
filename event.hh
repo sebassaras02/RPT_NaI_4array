@@ -23,9 +23,13 @@ public:
     void AddEdep2(G4double edep){fEdep2+=edep;};
     void AddEdep3(G4double edep){fEdep3+=edep;};
     void AddEdep4(G4double edep){fEdep4+=edep;};
+
+    // create a function to save TOF of each event
+    void AddTOF1(G4double time){tof1+=time;};
     
     private:
     G4double fEdep1, fEdep2, fEdep3, fEdep4;
+    G4double tof1;
 };
 
 #endif
