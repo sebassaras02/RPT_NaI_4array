@@ -27,7 +27,7 @@ void steppingaction::UserSteppingAction (const G4Step* step){
     
     G4int k1=0;
 
-    if (volume == fScoringVolume1 || k1==0) {
+    if (volume == fScoringVolume1 && k1==0) {
         G4StepPoint *preStepPoint = step->GetPreStepPoint();
         G4double tof1 = preStepPoint->GetGlobalTime();
         k1+=1;
