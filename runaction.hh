@@ -16,6 +16,7 @@
 #include "G4UnitsTable.hh"
 #include "globals.hh"
 #include "G4UserRunAction.hh"
+//#include "G4UnitDefinition.hh"
 
 class runaction : public G4UserRunAction{
     public:
@@ -27,10 +28,16 @@ class runaction : public G4UserRunAction{
     virtual void BeginOfRunAction(const G4Run*);
     virtual void EndOfRunAction(const G4Run*);
 
-    void AddEventEdep (G4double edep) {fEvEdep+=edep;};
+    void AddEventEdep1 (G4double edep) {fEvEdep1+=edep;};
+    void AddEventEdep2 (G4double edep) {fEvEdep2+=edep;};
+    void AddEventEdep3 (G4double edep) {fEvEdep3+=edep;};
+    void AddEventEdep4 (G4double edep) {fEvEdep4+=edep;};
 
     private:
-    G4Accumulable<G4double> fEvEdep = 0.;
+    G4Accumulable<G4double> fEvEdep1 = 0.;
+    G4Accumulable<G4double> fEvEdep2 = 0.;
+    G4Accumulable<G4double> fEvEdep3 = 0.;
+    G4Accumulable<G4double> fEvEdep4 = 0.;
 };
 
 #endif

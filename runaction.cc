@@ -17,7 +17,10 @@ runaction::runaction(){
 
   // Register accumulable to the accumulable manager
   G4AccumulableManager* accumulableManager = G4AccumulableManager::Instance();
-  accumulableManager->RegisterAccumulable(fEvEdep);
+  accumulableManager->RegisterAccumulable(fEvEdep1);
+  accumulableManager->RegisterAccumulable(fEvEdep2);
+  accumulableManager->RegisterAccumulable(fEvEdep3);
+  accumulableManager->RegisterAccumulable(fEvEdep4);
 }
 // define the destructor
 runaction::~runaction(){}
@@ -71,15 +74,27 @@ void runaction::EndOfRunAction(const G4Run*){
 
     // Compute dose = total energy deposit in a run and its variance
     //
-    G4double edep  = fEvEdep.GetValue();
+    G4double edep1  = fEvEdep1.GetValue();
+    G4double edep2  = fEvEdep2.GetValue();
+    G4double edep3  = fEvEdep3.GetValue();
+    G4double edep4  = fEvEdep4.GetValue();
 
     const detectorconstruction* detectorConstruction = static_cast<const detectorconstruction*>
         (G4RunManager::GetRunManager()->GetUserDetectorConstruction());
 
-    G4double mass = detectorConstruction->GetScoringVolume1()->GetMass();
-    mass=mass/kg;
-    edep=edep/joule;
-    G4double dose=edep/mass;
+    // get mass of detectors
+
+    G4double mass1 = detectorConstruction->GetScoringVolume1()->GetMass();
+    G4double mass2 = detectorConstruction->GetScoringVolume2()->GetMass();
+    G4double mass3 = detectorConstruction->GetScoringVolume3()->GetMass();
+    G4double mass4 = detectorConstruction->GetScoringVolume4()->GetMass();
+
+    //mass=mass/kg;
+    //edep=edep/joule;
+    G4double dose1=edep1/mass1;
+    G4double dose2=edep2/mass2;
+    G4double dose3=edep3/mass3;
+    G4double dose4=edep4/mass4;
 
 
     // initializate the run manager to store the hits
@@ -95,8 +110,10 @@ void runaction::EndOfRunAction(const G4Run*){
         G4cout<<"Nuclear Science Department"<<G4endl;
         G4cout<<"Escuela Politecnica Nacional"<<G4endl;
     #endif
-    G4cout<<"Dose deposited in detector 1 is: "<< dose*1e12 << " picoGy"<<G4endl;
-    G4cout<<"Mass of detector 1 is: "<< mass <<"kg"<<G4endl;
+    G4cout<<"Dose deposited in detector 1 is: "<< G4BestUnit(dose1,"Dose")<<G4endl;
+    G4cout<<"Dose deposited in detector 2 is: "<< G4BestUnit(dose2,"Dose")<<G4endl;
+    G4cout<<"Dose deposited in detector 3 is: "<< G4BestUnit(dose3,"Dose")<<G4endl;
+    G4cout<<"Dose deposited in detector 4 is: "<< G4BestUnit(dose4,"Dose")<<G4endl;
 
 
 }
