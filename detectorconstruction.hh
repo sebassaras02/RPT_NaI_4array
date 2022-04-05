@@ -49,14 +49,22 @@ class detectorconstruction:public G4VUserDetectorConstruction
     G4LogicalVolume *GetScoringVolume3() const {return fScoringVolume3;}
     G4LogicalVolume *GetScoringVolume4() const {return fScoringVolume4;}
 
-    // for messenger
+    // for detector position messegers
     void SetPos_NaI1(G4ThreeVector dims);
     void SetPos_NaI2(G4ThreeVector dims);
     void SetPos_NaI3(G4ThreeVector dims);
     void SetPos_NaI4(G4ThreeVector dims);
+
+    // for detector angle messenger
+    void SetAng_NaI1(G4double ang);
+    void SetAng_NaI2(G4double ang);
+    void SetAng_NaI3(G4double ang);
+    void SetAng_NaI4(G4double ang);
     
     // create the function to create detector
     virtual G4VPhysicalVolume* Construct();
+
+    
 private:
     // solids
     G4Box *solidWorld;
@@ -75,7 +83,7 @@ private:
     G4VPhysicalVolume *al_phys3, *si_phys3, *mg_phys3, *na_phys3;
     G4VPhysicalVolume *al_phys4, *si_phys4, *mg_phys4, *na_phys4;
     // rotation
-    G4RotationMatrix* m_rot;
+    G4RotationMatrix* m_rot,*m_rot1,*m_rot2,*m_rot3,*m_rot4;
 
     // define materials
     G4Material *air, *cu, *water, *al_mat, *si_mat, *mg_mat, *na_mat;
@@ -91,6 +99,8 @@ private:
     G4double posX2, posY2, posZ2; 
     G4double posX3, posY3, posZ3; 
     G4double posX4, posY4, posZ4; 
+    // angles for rotation matrix of detectors
+    G4double ang1, ang2,ang3,ang4;
 
 
     void DefineMaterials();

@@ -1,4 +1,8 @@
 /gps/particle ion
 /gps/ion 55 137
-/gps/pos/centre 50 0 0 cm
+/gps/pos/centre 0 0 0 cm
+/NaI/detector1/dimensions -50 20 0 cm
+/NaI/detector2/dimensions -50 -20 0 cm
+/NaI/detector3/dimensions -30 20 0 cm
+/NaI/detector4/dimensions -30 -20 0 cm
 /run/beamOn 100000

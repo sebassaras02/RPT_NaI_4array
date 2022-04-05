@@ -37,6 +37,11 @@ void detectorconstruction::DefaultValues(){
   ra_pipe=2*cm;
   len_pipe=0.5*m;
   th_pipe=0.01*cm;
+  // angles for detectors
+  ang1=180*deg;
+  ang2=0*deg;
+  ang3=180*deg;
+  ang4=0*deg;
 }
 // 
 
@@ -68,6 +73,26 @@ void detectorconstruction::SetPos_NaI4(G4ThreeVector dims) {
   posX4=dims[0];
   posY4=dims[1];
   posZ4=dims[2];
+  G4RunManager::GetRunManager()->ReinitializeGeometry();
+}
+
+void detectorconstruction::SetAng_NaI1(G4double ang) {
+  ang1=ang;
+  G4RunManager::GetRunManager()->ReinitializeGeometry();
+}
+
+void detectorconstruction::SetAng_NaI2(G4double ang) {
+  ang2=ang;
+  G4RunManager::GetRunManager()->ReinitializeGeometry();
+}
+
+void detectorconstruction::SetAng_NaI3(G4double ang) {
+  ang3=ang;
+  G4RunManager::GetRunManager()->ReinitializeGeometry();
+}
+
+void detectorconstruction::SetAng_NaI4(G4double ang) {
+  ang4=ang;
   G4RunManager::GetRunManager()->ReinitializeGeometry();
 }
 // define a function of materials
@@ -163,8 +188,12 @@ G4VPhysicalVolume* detectorconstruction::Construct()
                                                     "Aluminium_logic");         //its name
     G4ThreeVector ps_d1= G4ThreeVector (posX1, posY1, posZ1);
 
+    // define rotation matrix
+    m_rot1= new G4RotationMatrix();
+    m_rot1->rotateY(ang1);
+
     // define physical volume
-    al_phys= new G4PVPlacement(0,                       //no rotation
+    al_phys= new G4PVPlacement(m_rot1,                       //no rotation
                     ps_d1,                    //at position
                     al_logic,                //its logical volume
                     "detector_1",              //its name
@@ -242,8 +271,13 @@ G4VPhysicalVolume* detectorconstruction::Construct()
     al_logic2= new G4LogicalVolume(al_solid,         //its solid
                                                     al_mat,                 //its material
                                                     "Aluminium_logic");         //its name
+    
+    // define rotation matrix
+    m_rot2= new G4RotationMatrix();
+    m_rot2->rotateY(ang2);
+    
     // define physical volume
-    al_phys2= new G4PVPlacement(0,                       //no rotation
+    al_phys2= new G4PVPlacement(m_rot2,                       //no rotation
                     pos5,                    //at position
                     al_logic2,                //its logical volume
                     "detector_2",              //its name
@@ -308,8 +342,14 @@ G4VPhysicalVolume* detectorconstruction::Construct()
     al_logic3= new G4LogicalVolume(al_solid,         //its solid
                                                     al_mat,                 //its material
                                                     "Aluminium_logic");         //its name
+    
+    // define rotation matrix
+    m_rot3= new G4RotationMatrix();
+    m_rot3->rotateY(ang3);
+    
+
     // define physical volume
-    al_phys3= new G4PVPlacement(0,                       //no rotation
+    al_phys3= new G4PVPlacement(m_rot3,                       //no rotation
                     pos6,                    //at position
                     al_logic3,                //its logical volume
                     "detector_3",              //its name
@@ -373,8 +413,14 @@ G4VPhysicalVolume* detectorconstruction::Construct()
     al_logic4= new G4LogicalVolume(al_solid,         //its solid
                                                     al_mat,                 //its material
                                                     "Aluminium_logic");         //its name
+    
+    // define rotation matrix
+    m_rot4= new G4RotationMatrix();
+    m_rot4->rotateY(ang4);
+    
+    
     // define physical volume
-    al_phys4= new G4PVPlacement(0,                       //no rotation
+    al_phys4= new G4PVPlacement(m_rot4,                       //no rotation
                     pos7,                    //at position
                     al_logic4,                //its logical volume
                     "detector_4",              //its name
