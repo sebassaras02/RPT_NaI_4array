@@ -17,19 +17,21 @@ int main (int argc, char** argv)
 
     #ifdef G4MULTITHREADED
         G4MTRunManager* runmanager= new G4MTRunManager();
+        G4cout<<"Multithread execution"<<G4endl;
     #else
     /* always use G4RunManager which is the top of execution of Geant4*/
         G4RunManager* runmanager= new G4RunManager();
+        G4cout<<"Single execution"<<G4endl;
     #endif
   
-    runmanager->SetNumberOfThreads(6);
+    // runmanager->SetNumberOfThreads(6);
 
     // tell geant4 to inizilitation of detector construction
     runmanager->SetUserInitialization(new detectorconstruction());
     runmanager->SetUserInitialization(new physicslist());
     runmanager->SetUserInitialization(new actioninitialization());
     // only initialize runmanger just in case you have all mandatory classes
-    runmanager->Initialize();
+    // runmanager->Initialize();
     // need user interfase
     // define the graphical execution only without an entry
     

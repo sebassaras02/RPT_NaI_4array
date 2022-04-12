@@ -24,18 +24,18 @@ void steppingaction::UserSteppingAction (const G4Step* step){
       ->GetVolume()->GetLogicalVolume();
       
     G4double edep= step->GetTotalEnergyDeposit();
+
+    G4Track *track = step->GetTrack();
     
-    G4int k1=0;
-
-    if (volume == fScoringVolume1 && k1==0) {
-        G4StepPoint *preStepPoint = step->GetPreStepPoint();
-        G4double tof1 = preStepPoint->GetGlobalTime();
-        k1+=1;
-        fEventAction->AddTOF1(tof1);
-    }
-
     if (volume == fScoringVolume1) {
         fEventAction->AddEdep1(edep);
+
+        G4bool st1 = step->IsFirstStepInVolume();
+        
+        if (st1 == true){
+            G4double tof1 = track->GetGlobalTime();
+            fEventAction->AddTOF1(tof1);
+        }
     }
     else if(volume == fScoringVolume2) {
         fEventAction->AddEdep2(edep);

@@ -29,6 +29,7 @@ public:
     
     private:
     G4double fEdep1, fEdep2, fEdep3, fEdep4;
+    G4double cfdet;
     G4double tof1;
 };
 

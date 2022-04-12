@@ -1,4 +1,6 @@
+/run/numberOfThreads 6
+/run/initialize 
 /gps/particle ion
 /gps/ion 55 137
 /gps/pos/centre 50 0 0 cm
-/run/beamOn 100000
+/run/beamOn 1000000
