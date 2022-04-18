@@ -24,8 +24,9 @@ class detectormessenger : public  G4UImessenger
 
   private:
     
-    G4UIdirectory *fDetectorDir1, *fDetectorDir2, *fDetectorDir3, *fDetectorDir4;
+    G4UIdirectory *fDetectorDir1, *fDetectorDir2, *fDetectorDir3, *fDetectorDir4, *UIfpipe;
     G4UIcmdWith3VectorAndUnit *pos_NaI1, *pos_NaI2, *pos_NaI3, *pos_NaI4;
+    G4UIcmdWith3VectorAndUnit *fpipe;
     G4UIcmdWithADoubleAndUnit *angdet1, *angdet2, *angdet3, *angdet4;
     detectorconstruction *f_det;
 

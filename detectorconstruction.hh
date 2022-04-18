@@ -61,6 +61,9 @@ class detectorconstruction:public G4VUserDetectorConstruction
     void SetAng_NaI3(G4double ang);
     void SetAng_NaI4(G4double ang);
     
+    // for pipe messenger
+    void SetPipeDim(G4ThreeVector pipe_dim);
+    
     // create the function to create detector
     virtual G4VPhysicalVolume* Construct();
 

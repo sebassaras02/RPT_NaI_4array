@@ -7,7 +7,7 @@ detectormessenger::detectormessenger(detectorconstruction* detector_):f_det(dete
   fDetectorDir1 = new G4UIdirectory("/NaI/detector1/");
   fDetectorDir1->SetGuidance("Detector 1 geometry position");
 
-  //Various commands for modifying detector geometry
+  //Various commands for modifying detector 1 geometry
   pos_NaI1 = new G4UIcmdWith3VectorAndUnit("/NaI/detector1/dimensions",this);
   pos_NaI1->SetGuidance("Set the positions of the detector 1");
   pos_NaI1->SetParameterName("scint_x1","scint_y1","scint_z1",false);
@@ -28,7 +28,7 @@ detectormessenger::detectormessenger(detectorconstruction* detector_):f_det(dete
   fDetectorDir2= new G4UIdirectory("/NaI/detector2/");
   fDetectorDir2->SetGuidance("Detector 2 geometry position");
 
-  //Various commands for modifying detector geometry
+  //Various commands for modifying detector 2 geometry
   pos_NaI2 = new G4UIcmdWith3VectorAndUnit("/NaI/detector2/dimensions",this);
   pos_NaI2->SetGuidance("Set the positions of the detector volume 2");
   pos_NaI2->SetParameterName("scint_x2","scint_y2","scint_z2",false);
@@ -49,7 +49,7 @@ detectormessenger::detectormessenger(detectorconstruction* detector_):f_det(dete
   fDetectorDir3= new G4UIdirectory("/NaI/detector3/");
   fDetectorDir3->SetGuidance("Detector 3 geometry position");
 
-  //Various commands for modifying detector geometry
+  //Various commands for modifying detector 3 geometry
   pos_NaI3 = new G4UIcmdWith3VectorAndUnit("/NaI/detector3/dimensions",this);
   pos_NaI3->SetGuidance("Set the positions of the detector volume 2");
   pos_NaI3->SetParameterName("scint_x2","scint_y2","scint_z2",false);
@@ -70,7 +70,7 @@ detectormessenger::detectormessenger(detectorconstruction* detector_):f_det(dete
   fDetectorDir4= new G4UIdirectory("/NaI/detector4/");
   fDetectorDir4->SetGuidance("Detector 4 geometry position");
 
-  //Various commands for modifying detector geometry
+  //Various commands for modifying detector 4 geometry
   pos_NaI4 = new G4UIcmdWith3VectorAndUnit("/NaI/detector4/dimensions",this);
   pos_NaI4->SetGuidance("Set the positions of the detector volume 2");
   pos_NaI4->SetParameterName("scint_x2","scint_y2","scint_z2",false);
@@ -78,13 +78,26 @@ detectormessenger::detectormessenger(detectorconstruction* detector_):f_det(dete
   pos_NaI4->AvailableForStates(G4State_PreInit,G4State_Idle);
   pos_NaI4->SetToBeBroadcasted(false);
 
-  //Commands for modifying detector 1 angle
+  //Commands for modifying detector 4 angle
   angdet4 = new G4UIcmdWithADoubleAndUnit("/NaI/detector4/angle",this);
   angdet4->SetGuidance("Set angle of detector 4");
   angdet4->SetParameterName("ang_det4", false);
   angdet4->SetDefaultUnit("deg");
   angdet4->AvailableForStates(G4State_PreInit,G4State_Idle);
   angdet4->SetToBeBroadcasted(false);
+
+  // Pipe properties
+  // Set directory to change the pipe properties
+  UIfpipe = new G4UIdirectory("/pipe");
+  UIfpipe->SetGuidance("Change pipe length");
+
+  //Various commands for modifying detector 4 geometry
+  fpipe = new G4UIcmdWith3VectorAndUnit("/pipe/dim",this);
+  fpipe->SetGuidance("Set thickness, radious, and length of the pipe in cm");
+  fpipe->SetParameterName("thickness","radious","length",false);
+  fpipe->SetDefaultUnit("cm");
+  fpipe->AvailableForStates(G4State_PreInit,G4State_Idle);
+  fpipe->SetToBeBroadcasted(false);
 }
 
 detectormessenger::~detectormessenger(){
@@ -94,10 +107,19 @@ detectormessenger::~detectormessenger(){
   delete pos_NaI4;
   delete pos_NaI4;
   delete angdet1;
+  delete angdet2;
+  delete angdet3;
+  delete angdet4;
+  delete fpipe;
 }
 
 void detectormessenger::SetNewValue(G4UIcommand* command, G4String newValue)
 {
+
+  if( command == fpipe ){
+    f_det->SetPipeDim(fpipe->GetNew3VectorValue(newValue));
+  }
+
   if( command == pos_NaI1 ){
     f_det->SetPos_NaI1(pos_NaI1->GetNew3VectorValue(newValue));
   }
@@ -116,6 +138,18 @@ void detectormessenger::SetNewValue(G4UIcommand* command, G4String newValue)
 
   if( command == angdet1 ){
     f_det->SetAng_NaI1(angdet1->GetNewDoubleValue(newValue));
+  }
+
+  if( command == angdet2 ){
+    f_det->SetAng_NaI2(angdet2->GetNewDoubleValue(newValue));
+  }
+
+  if( command == angdet3 ){
+    f_det->SetAng_NaI3(angdet3->GetNewDoubleValue(newValue));
+  }
+
+  if( command == angdet4 ){
+    f_det->SetAng_NaI4(angdet4->GetNewDoubleValue(newValue));
   }
 }
 

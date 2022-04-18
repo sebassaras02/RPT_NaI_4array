@@ -17,6 +17,10 @@ detectorconstruction::~detectorconstruction()
 {}
 // function for default values of messenger
 void detectorconstruction::DefaultValues(){
+  // pipe
+  ra_pipe=2*cm;
+  len_pipe=0.5*m;
+  th_pipe=0.01*cm;
   // first detector
   posX1=-20*cm; 
   posY1=0*cm;
@@ -25,7 +29,7 @@ void detectorconstruction::DefaultValues(){
   posX2=-20*cm; 
   posY2=0*cm;
   posZ2=-20*cm;
-  // third detector
+  // third detector)
   posX3=20*cm;  
   posY3=0*cm;
   posZ3=20*cm;
@@ -33,10 +37,6 @@ void detectorconstruction::DefaultValues(){
   posX4=20*cm;  
   posY4=0*cm;
   posZ4=-20*cm;
-  // pipe
-  ra_pipe=2*cm;
-  len_pipe=0.5*m;
-  th_pipe=0.01*cm;
   // angles for detectors
   ang1=180*deg;
   ang2=0*deg;
@@ -47,6 +47,13 @@ void detectorconstruction::DefaultValues(){
 
 // define the action constructors
 // first detector
+
+void detectorconstruction::SetPipeDim(G4ThreeVector pipe_dim) {
+  th_pipe=pipe_dim[0];
+  ra_pipe=pipe_dim[1];
+  len_pipe=pipe_dim[2];
+  G4RunManager::GetRunManager()->ReinitializeGeometry();
+}
 
 void detectorconstruction::SetPos_NaI1(G4ThreeVector dims) {
   posX1=dims[0];

@@ -1,10 +1,15 @@
-/gps/pos/centre 0 0 0 cm
-/NaI/detector1/dimensions -50 20 0 cm
-/NaI/detector2/dimensions -50 -20 0 cm
-/NaI/detector3/dimensions -30 20 0 cm
-/NaI/detector4/dimensions -30 -20 0 cm
-/gps/pos/centre 50 0 0 cm
+/NaI/detector1/dimensions -40 10 0 cm
+/NaI/detector1/angle 90 deg
+/NaI/detector2/dimensions -40 -10 0 cm
+/NaI/detector2/angle 90 deg
+/NaI/detector3/dimensions 40 10 0 cm
+/NaI/detector3/angle 90 deg
+/NaI/detector4/dimensions 40 -10 0 cm
+/NaI/detector4/angle 90 deg
+/pipe/dim 1 3 20 cm
 /run/numberOfThreads 6
 /run/initialize 
-/run/beamOn 1000000
-
+/gps/particle ion
+/gps/ion 55 137
+/gps/pos/centre 0 0 -20 cm
+/run/beamOn 10
