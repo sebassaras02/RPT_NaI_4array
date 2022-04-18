@@ -21,9 +21,15 @@ runaction::runaction(){
   accumulableManager->RegisterAccumulable(fEvEdep2);
   accumulableManager->RegisterAccumulable(fEvEdep3);
   accumulableManager->RegisterAccumulable(fEvEdep4);
+
+  G4AnalysisManager*man = G4AnalysisManager::Instance();
+  //man->SetVerboseLevel(1);
+  man->SetNtupleMerging(true,0);  
 }
 // define the destructor
-runaction::~runaction(){}
+runaction::~runaction(){
+    // delete G4AnalysisManager::Instance();
+}
 
 void runaction::BeginOfRunAction(const G4Run* run){
 
@@ -36,7 +42,7 @@ void runaction::BeginOfRunAction(const G4Run* run){
 
 
     // initializate the run manager to store the hits
-    G4AnalysisManager*man = G4AnalysisManager::Instance();
+    G4AnalysisManager*man = G4AnalysisManager::Instance();  
     //man->SetHistoDictoryName("histograms");
     // create a file for each run
 
@@ -44,9 +50,9 @@ void runaction::BeginOfRunAction(const G4Run* run){
     std::stringstream strRunID;
     strRunID<<RunID;
 
-    man->OpenFile("output"+strRunID.str()+".root");
+    man->OpenFile("output"+strRunID.str()+".root");   
 
-    
+
     man->CreateNtuple("Detector_1","Edep");
     man->CreateNtupleDColumn("fedep1");
     man->FinishNtuple(0);   
@@ -62,9 +68,13 @@ void runaction::BeginOfRunAction(const G4Run* run){
     man->CreateNtuple("Detector_4","Edep");
     man->CreateNtupleDColumn("fedep4");
     man->FinishNtuple(3);
-   
-    
+
+    man->CreateNtuple("Detector_1_time","TOF");
+    man->CreateNtupleDColumn("TOF1");
+    man->FinishNtuple(4);
 }
+    
+
 void runaction::EndOfRunAction(const G4Run*){
 
 

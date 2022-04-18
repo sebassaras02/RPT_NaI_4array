@@ -24,9 +24,18 @@ void steppingaction::UserSteppingAction (const G4Step* step){
       ->GetVolume()->GetLogicalVolume();
       
     G4double edep= step->GetTotalEnergyDeposit();
+
+    G4Track *track = step->GetTrack();
     
     if (volume == fScoringVolume1) {
         fEventAction->AddEdep1(edep);
+
+        G4bool st1 = step->IsFirstStepInVolume();
+        
+        if (st1 == true){
+            G4double tof1 = track->GetGlobalTime();
+            fEventAction->AddTOF1(tof1);
+        }
     }
     else if(volume == fScoringVolume2) {
         fEventAction->AddEdep2(edep);

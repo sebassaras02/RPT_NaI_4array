@@ -9,6 +9,8 @@ eventaction::eventaction(runaction* runAction){
     fEdep3=0.;
     fEdep4=0.;
     fRunAction=runAction;
+    tof1=0.;
+    cfdet=0.;
 }
 // initialize destructor
 eventaction::~eventaction(){}
@@ -21,6 +23,8 @@ void eventaction::BeginOfEventAction(const G4Event*){
     fEdep2=0.;
     fEdep3=0.;
     fEdep4=0.;
+    tof1=0.;
+    cfdet=0.;
 }
 
 void eventaction::EndOfEventAction(const G4Event*){
@@ -29,6 +33,7 @@ void eventaction::EndOfEventAction(const G4Event*){
     G4AnalysisManager* man= G4AnalysisManager::Instance();
 
     if (fEdep1>0.0*MeV){
+        cfdet=0.2157*fEdep1/(keV)-11.8845;
         man->FillNtupleDColumn(0,0,fEdep1);
         man->AddNtupleRow(0);
         fRunAction->AddEventEdep1(fEdep1);
@@ -52,6 +57,10 @@ void eventaction::EndOfEventAction(const G4Event*){
         fRunAction->AddEventEdep4(fEdep4);
     }
     
-    
+    if (tof1>0*ns){
+        man->FillNtupleDColumn(4,0,tof1);
+        man->AddNtupleRow(4);
+
+    }
 
 }
