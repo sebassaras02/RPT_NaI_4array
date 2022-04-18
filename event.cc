@@ -32,7 +32,7 @@ void eventaction::EndOfEventAction(const G4Event*){
     G4AnalysisManager* man= G4AnalysisManager::Instance();
 
     if (fEdep1>0.0*MeV){
-        cfdet=0.2157e-3*fEdep1/(keV)-11.8845e-3;
+        cfdet=0.2157*fEdep1/(keV)-11.8845;
         man->FillNtupleDColumn(0,0,fEdep1);
         man->AddNtupleRow(0);
     }
