@@ -2,6 +2,7 @@
 #include "generator.hh"
 #include "event.hh"
 #include "stepping.hh"
+#include "stacking.hh"
 
 // contructor
 actioninitialization::actioninitialization(){}
@@ -27,5 +28,7 @@ void actioninitialization::Build() const{
     
     steppingaction* SteppingAction= new steppingaction(EventAction);
     SetUserAction(SteppingAction);
+
+    SetUserAction(new stackingaction);
 }
 

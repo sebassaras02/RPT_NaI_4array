@@ -9,6 +9,8 @@
 /pipe/dim 1 3 20 cm
 /run/numberOfThreads 6
 /run/initialize 
+/kill/neutrino false
+/kill/neutron true
 /gps/particle ion
 /gps/ion 55 137
 /gps/pos/centre 0 0 -20 cm
