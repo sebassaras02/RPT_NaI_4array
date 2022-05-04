@@ -55,14 +55,27 @@ class detectorconstruction:public G4VUserDetectorConstruction
     void SetPos_NaI3(G4ThreeVector dims);
     void SetPos_NaI4(G4ThreeVector dims);
 
-    // for detector angle messenger
+    // for detector angle messenger along Y axis
     void SetAng_NaI1(G4double ang);
     void SetAng_NaI2(G4double ang);
     void SetAng_NaI3(G4double ang);
     void SetAng_NaI4(G4double ang);
-    
+
+ 
     // for pipe messenger
-    void SetPipeDim(G4ThreeVector pipe_dim);
+    void SetPipeDimCyl(G4ThreeVector pipe_dim);
+    void SetPipeDimBox(G4ThreeVector pipe_dim);
+    void SetPipeCyl(G4bool g1);
+    void SetPipeBox(G4bool g1);
+
+    // method to construct cylinder pipe
+    void ConstructCylinderPipe();
+    void ConstructBoxPipe();
+    
+
+    // methods to construct NaI detectors
+    void ConstructNaI1();
+
     
     // create the function to create detector
     virtual G4VPhysicalVolume* Construct();
@@ -70,7 +83,7 @@ class detectorconstruction:public G4VUserDetectorConstruction
     
 private:
     // solids
-    G4Box *solidWorld;
+    G4Box *solidWorld, *cuadbox_solid,*water_solid_box;
     G4Tubs  *pipe_solid, *water_solid, *al_solid, *si_solid, *mg_solid,*na_solid;
     // logical volumes
     G4LogicalVolume *pipe_logic, *water_logic,*logicWorld, *logic_nai1, *logic_nai2, *logic_nai3, *logic_nai4;
@@ -97,6 +110,7 @@ private:
     G4double posNaI_x, posNaI_y, posNaI_z;
     // it is defined inner radius and thickness 
     G4double len_pipe, ra_pipe, th_pipe;
+    G4double len_pipebox, y_pipe, z_pipe;
     // positions of detectors
     G4double posX1, posY1, posZ1; 
     G4double posX2, posY2, posZ2; 
@@ -104,6 +118,17 @@ private:
     G4double posX4, posY4, posZ4; 
     // angles for rotation matrix of detectors
     G4double ang1, ang2,ang3,ang4;
+
+    // variables of messengers to construct one kind of pipe
+    G4bool isPipeBox, isPipeCylinder;
+
+    // positions for detector's parts
+    G4double j=(4.1025-0.05-0.15)*cm;
+    G4ThreeVector pos2 = G4ThreeVector(0,0,-j);
+    G4double j1=(0.15)*cm;
+    G4ThreeVector pos3 = G4ThreeVector(0,0,j1);
+    G4double j2=(0.0915)*cm;
+    G4ThreeVector pos4 = G4ThreeVector(0,0,-j2);
 
 
     void DefineMaterials();

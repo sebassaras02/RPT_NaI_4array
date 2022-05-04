@@ -91,13 +91,34 @@ detectormessenger::detectormessenger(detectorconstruction* detector_):f_det(dete
   UIfpipe = new G4UIdirectory("/pipe");
   UIfpipe->SetGuidance("Change pipe length");
 
-  //Various commands for modifying detector 4 geometry
-  fpipe = new G4UIcmdWith3VectorAndUnit("/pipe/dim",this);
-  fpipe->SetGuidance("Set thickness, radious, and length of the pipe in cm");
-  fpipe->SetParameterName("thickness","radious","length",false);
-  fpipe->SetDefaultUnit("cm");
-  fpipe->AvailableForStates(G4State_PreInit,G4State_Idle);
-  fpipe->SetToBeBroadcasted(false);
+  // commands to create cylinder
+  isCyl = new G4UIcmdWithABool("/pipe/cyl/activate",this);
+  isCyl->SetGuidance("Create a cylinder pipe");
+  isCyl->AvailableForStates(G4State_PreInit,G4State_Idle);
+  isCyl->SetToBeBroadcasted(false);
+
+  // commands to change cylinder pipe's geometry
+  fpipe_cyl = new G4UIcmdWith3VectorAndUnit("/pipe/cyl/dim",this);
+  fpipe_cyl->SetGuidance("Set thickness, radious, and length of the pipe in cm");
+  fpipe_cyl->SetParameterName("thickness","radious","length",false);
+  fpipe_cyl->SetDefaultUnit("cm");
+  fpipe_cyl->AvailableForStates(G4State_PreInit,G4State_Idle);
+  fpipe_cyl->SetToBeBroadcasted(false);
+
+  // commands to create box
+  isBox = new G4UIcmdWithABool("/pipe/box/activate",this);
+  isBox->SetGuidance("Create a box pipe");
+  isBox->AvailableForStates(G4State_PreInit,G4State_Idle);
+  isBox->SetToBeBroadcasted(false);
+
+  // commands to change cylinder pipe's geometry
+  fpipe_box = new G4UIcmdWith3VectorAndUnit("/pipe/box/dim",this);
+  fpipe_box->SetGuidance("Set x, y, and z dimensions of the pipe in cm (x is the depth, and x-y the perpendicular surface)");
+  fpipe_box->SetParameterName("x-length","y-length","z-length",false);
+  fpipe_box->SetDefaultUnit("cm");
+  fpipe_box->AvailableForStates(G4State_PreInit,G4State_Idle);
+  fpipe_box->SetToBeBroadcasted(false);
+
 }
 
 detectormessenger::~detectormessenger(){
@@ -110,14 +131,21 @@ detectormessenger::~detectormessenger(){
   delete angdet2;
   delete angdet3;
   delete angdet4;
-  delete fpipe;
+  delete fpipe_cyl;
+  delete fpipe_box;
+  delete isBox;
+  delete isCyl;
 }
 
 void detectormessenger::SetNewValue(G4UIcommand* command, G4String newValue)
 {
 
-  if( command == fpipe ){
-    f_det->SetPipeDim(fpipe->GetNew3VectorValue(newValue));
+  if( command == fpipe_cyl ){
+    f_det->SetPipeDimCyl(fpipe_cyl->GetNew3VectorValue(newValue));
+  }
+
+  if( command == fpipe_box ){
+    f_det->SetPipeDimBox(fpipe_box->GetNew3VectorValue(newValue));
   }
 
   if( command == pos_NaI1 ){
@@ -148,8 +176,17 @@ void detectormessenger::SetNewValue(G4UIcommand* command, G4String newValue)
     f_det->SetAng_NaI3(angdet3->GetNewDoubleValue(newValue));
   }
 
+  
   if( command == angdet4 ){
     f_det->SetAng_NaI4(angdet4->GetNewDoubleValue(newValue));
+  }
+
+  if( command == isBox ){
+    f_det->SetPipeBox(isBox->GetNewBoolValue(newValue));
+  }
+
+  if( command == isCyl ){
+    f_det->SetPipeCyl(isCyl->GetNewBoolValue(newValue));
   }
 }
 

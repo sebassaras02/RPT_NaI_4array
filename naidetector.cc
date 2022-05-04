@@ -24,14 +24,14 @@ int main (int argc, char** argv)
         G4cout<<"Single execution"<<G4endl;
     #endif
   
-    // runmanager->SetNumberOfThreads(6);
+    runmanager->SetNumberOfThreads(6);
 
     // tell geant4 to inizilitation of detector construction
     runmanager->SetUserInitialization(new detectorconstruction());
     runmanager->SetUserInitialization(new physicslist());
     runmanager->SetUserInitialization(new actioninitialization());
     // only initialize runmanger just in case you have all mandatory classes
-    // runmanager->Initialize();
+     runmanager->Initialize();
     // need user interfase
     // define the graphical execution only without an entry
     
