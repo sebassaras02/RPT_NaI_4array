@@ -7,11 +7,12 @@
 /NaI/detector4/dimensions 40 -20 0 cm
 /NaI/detector4/angle 90 deg
 /pipe/box/activate true
-/pipe/box/dim 20 5 5 cm
+/pipe/box/dim 50 10 10 cm
+/vis/scene/add/axes
 /run/numberOfThreads 6
 /run/initialize 
 /gps/particle ion
 /gps/ion 55 137
-/gps/pos/centre 0 0 -20 cm
+/gps/pos/centre 0 0 0 cm
 /run/beamOn 10
 

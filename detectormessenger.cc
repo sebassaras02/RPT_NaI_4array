@@ -88,7 +88,7 @@ detectormessenger::detectormessenger(detectorconstruction* detector_):f_det(dete
 
   // Pipe properties
   // Set directory to change the pipe properties
-  UIfpipe = new G4UIdirectory("/pipe");
+  UIfpipe = new G4UIdirectory("/pipe/");
   UIfpipe->SetGuidance("Change pipe length");
 
   // commands to create cylinder
