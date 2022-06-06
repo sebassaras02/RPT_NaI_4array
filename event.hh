@@ -28,13 +28,16 @@ public:
 
     // create a function to save TOF of each event
     void AddTOF1(G4double time){tof1+=time;};
+    void AddTOF2(G4double time){tof2+=time;};
+    void AddTOF3(G4double time){tof3+=time;};
+    void AddTOF4(G4double time){tof4+=time;};
     
     private:
     G4double fEdep1, fEdep2, fEdep3, fEdep4;
 
     runaction* fRunAction = nullptr;
     G4double cfdet;
-    G4double tof1;
+    G4double tof1, tof2, tof3,tof4;
 };
 
 #endif

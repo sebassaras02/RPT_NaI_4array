@@ -10,8 +10,8 @@
 /pipe/box/dim 50 10 10 cm
 /run/numberOfThreads 6
 /run/initialize 
-/gps/particle ion
-/gps/ion 55 137
-/gps/pos/centre 0 0 -20 cm
-/run/beamOn 10
-
+/gps/particle gamma
+/gps/energy 662 keV
+/gps/pos/centre 0 0 0 cm
+/gps/ang/type iso
+/run/beamOn 1000000

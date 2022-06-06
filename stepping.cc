@@ -39,12 +39,35 @@ void steppingaction::UserSteppingAction (const G4Step* step){
     }
     else if(volume == fScoringVolume2) {
         fEventAction->AddEdep2(edep);
+        
+        G4bool st2= step->IsFirstStepInVolume();
+        
+        if (st2 == true){
+            G4double tof2 = track->GetGlobalTime();
+            fEventAction->AddTOF2(tof2);
+        }
     }
     else if(volume == fScoringVolume3) {
         fEventAction->AddEdep3(edep);
+
+        G4bool st3= step->IsFirstStepInVolume();
+        
+        if (st3 == true){
+            G4double tof3 = track->GetGlobalTime();
+            fEventAction->AddTOF3(tof3);
+        }
+
     }
     else if(volume == fScoringVolume4) {
         fEventAction->AddEdep4(edep);
+
+        G4bool st4= step->IsFirstStepInVolume();
+        
+        if (st4 == true){
+            G4double tof4 = track->GetGlobalTime();
+            fEventAction->AddTOF4(tof4);
+        }
+
     }
 
     
