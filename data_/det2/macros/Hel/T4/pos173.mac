@@ -8,7 +8,7 @@
 /NaI/detector4/angle 0
 /pipe/box/activate true
 /pipe/box/dim 50 10 10 cm 
-/run/numberOfThreads 6 
+/run/numberOfThreads 100 
 /run/initialize 
 /gps/particle gamma 
 /gps/energy 662 keV 
