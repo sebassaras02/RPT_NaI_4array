@@ -68,6 +68,14 @@ class detectorconstruction:public G4VUserDetectorConstruction
     void SetPipeCyl(G4bool g1);
     void SetPipeBox(G4bool g1);
 
+
+    // for detector rotation
+    void SetRotationDet1(G4bool a);
+    void SetRotationDet2(G4bool a);
+    void SetRotationDet3(G4bool a);
+    void SetRotationDet4(G4bool a);
+
+
     // method to construct cylinder pipe
     void ConstructCylinderPipe();
     void ConstructBoxPipe();
@@ -75,6 +83,15 @@ class detectorconstruction:public G4VUserDetectorConstruction
 
     // methods to construct NaI detectors
     void ConstructNaI1();
+    void ConstructNaI2();
+    void ConstructNaI3();
+    void ConstructNaI4();
+
+    // methods to rotate X,Y, and Z for each NaI detector
+    void Set_Rotate_X_NaI1(G4bool a),Set_Rotate_Y_NaI1(G4bool a),Set_Rotate_Z_NaI1(G4bool a);
+    void Set_Rotate_X_NaI2(G4bool a),Set_Rotate_Y_NaI2(G4bool a),Set_Rotate_Z_NaI2(G4bool a);
+    void Set_Rotate_X_NaI3(G4bool a),Set_Rotate_Y_NaI3(G4bool a),Set_Rotate_Z_NaI3(G4bool a);
+    void Set_Rotate_X_NaI4(G4bool a),Set_Rotate_Y_NaI4(G4bool a),Set_Rotate_Z_NaI4(G4bool a);
 
     
     // create the function to create detector
@@ -121,6 +138,13 @@ private:
 
     // variables of messengers to construct one kind of pipe
     G4bool isPipeBox, isPipeCylinder;
+
+    // variables of messegers to rotate detectors in one direction
+    G4bool isRotX_NaI1, isRotY_NaI1, isRotZ_NaI1;
+    G4bool isRotX_NaI2, isRotY_NaI2, isRotZ_NaI2;
+    G4bool isRotX_NaI3, isRotY_NaI3, isRotZ_NaI3;
+    G4bool isRotX_NaI4, isRotY_NaI4, isRotZ_NaI4;
+
 
     // positions for detector's parts
     G4double j=(4.1025-0.05-0.15)*cm;

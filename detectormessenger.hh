@@ -30,6 +30,10 @@ class detectormessenger : public  G4UImessenger
     G4UIcmdWith3VectorAndUnit *fpipe_cyl,*fpipe_box;
     G4UIcmdWithADoubleAndUnit *angdet1, *angdet2, *angdet3, *angdet4;
     G4UIcmdWithABool *isBox, *isCyl;
+    G4UIcmdWithABool *isRotx1, *isRoty1,*isRotz1;
+    G4UIcmdWithABool *isRotx2, *isRoty2,*isRotz2;
+    G4UIcmdWithABool *isRotx3, *isRoty3,*isRotz3;
+    G4UIcmdWithABool *isRotx4, *isRoty4,*isRotz4;
     detectorconstruction *f_det;
 
     

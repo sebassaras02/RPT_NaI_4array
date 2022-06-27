@@ -1,11 +1,15 @@
 /NaI/detector1/dimensions -40 20 0 cm
 /NaI/detector1/angle 90 deg
+/NaI/detector1/rotZ true
 /NaI/detector2/dimensions -40 -20 0 cm
 /NaI/detector2/angle 90 deg
+/NaI/detector2/rotZ true
 /NaI/detector3/dimensions 40 20 0 cm
 /NaI/detector3/angle 90 deg
+/NaI/detector3/rotZ true
 /NaI/detector4/dimensions 40 -20 0 cm
 /NaI/detector4/angle 90 deg
+/NaI/detector4/rotZ true
 /pipe/box/activate true
 /pipe/box/dim 50 10 10 cm
 /vis/scene/add/axes

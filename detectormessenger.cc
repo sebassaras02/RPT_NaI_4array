@@ -22,6 +22,21 @@ detectormessenger::detectormessenger(detectorconstruction* detector_):f_det(dete
   angdet1->SetDefaultUnit("deg");
   angdet1->AvailableForStates(G4State_PreInit,G4State_Idle);
   angdet1->SetToBeBroadcasted(false);
+
+  isRotx1 = new G4UIcmdWithABool("/NaI/detector1/rotX",this); 
+  isRotx1->SetGuidance("Rotate the detector along X axis");
+  isRotx1->AvailableForStates(G4State_PreInit,G4State_Idle);
+  isRotx1->SetToBeBroadcasted(false);
+
+  isRoty1 = new G4UIcmdWithABool("/NaI/detector1/rotY",this);
+  isRoty1->SetGuidance("Rotate the detector along Y axis");
+  isRoty1->AvailableForStates(G4State_PreInit,G4State_Idle);
+  isRoty1->SetToBeBroadcasted(false);
+
+  isRotz1 = new G4UIcmdWithABool("/NaI/detector1/rotZ",this);
+  isRotz1->SetGuidance("Rotate the detector along Z axis");
+  isRotz1->AvailableForStates(G4State_PreInit,G4State_Idle);
+  isRotz1->SetToBeBroadcasted(false);
   
   // second detector
   // set directory to change NaI
@@ -44,6 +59,21 @@ detectormessenger::detectormessenger(detectorconstruction* detector_):f_det(dete
   angdet2->AvailableForStates(G4State_PreInit,G4State_Idle);
   angdet2->SetToBeBroadcasted(false);
 
+  isRotx2 = new G4UIcmdWithABool("/NaI/detector2/rotX",this); 
+  isRotx2->SetGuidance("Rotate the detector along X axis");
+  isRotx2->AvailableForStates(G4State_PreInit,G4State_Idle);
+  isRotx2->SetToBeBroadcasted(false);
+
+  isRoty2 = new G4UIcmdWithABool("/NaI/detector2/rotY",this);
+  isRoty2->SetGuidance("Rotate the detector along Y axis");
+  isRoty2->AvailableForStates(G4State_PreInit,G4State_Idle);
+  isRoty2->SetToBeBroadcasted(false);
+
+  isRotz2 = new G4UIcmdWithABool("/NaI/detector2/rotZ",this);
+  isRotz2->SetGuidance("Rotate the detector along Z axis");
+  isRotz2->AvailableForStates(G4State_PreInit,G4State_Idle);
+  isRotz2->SetToBeBroadcasted(false);
+
   // third detector
   // set directory to change NaI
   fDetectorDir3= new G4UIdirectory("/NaI/detector3/");
@@ -65,6 +95,21 @@ detectormessenger::detectormessenger(detectorconstruction* detector_):f_det(dete
   angdet3->AvailableForStates(G4State_PreInit,G4State_Idle);
   angdet3->SetToBeBroadcasted(false);
 
+  isRotx3 = new G4UIcmdWithABool("/NaI/detector3/rotX",this); 
+  isRotx3->SetGuidance("Rotate the detector along X axis");
+  isRotx3->AvailableForStates(G4State_PreInit,G4State_Idle);
+  isRotx3->SetToBeBroadcasted(false);
+
+  isRoty3 = new G4UIcmdWithABool("/NaI/detector3/rotY",this);
+  isRoty3->SetGuidance("Rotate the detector along Y axis");
+  isRoty3->AvailableForStates(G4State_PreInit,G4State_Idle);
+  isRoty3->SetToBeBroadcasted(false);
+
+  isRotz3 = new G4UIcmdWithABool("/NaI/detector3/rotZ",this);
+  isRotz3->SetGuidance("Rotate the detector along Z axis");
+  isRotz3->AvailableForStates(G4State_PreInit,G4State_Idle);
+  isRotz3->SetToBeBroadcasted(false);
+
   // fourth detector
   // set directory to change NaI
   fDetectorDir4= new G4UIdirectory("/NaI/detector4/");
@@ -85,6 +130,21 @@ detectormessenger::detectormessenger(detectorconstruction* detector_):f_det(dete
   angdet4->SetDefaultUnit("deg");
   angdet4->AvailableForStates(G4State_PreInit,G4State_Idle);
   angdet4->SetToBeBroadcasted(false);
+
+  isRotx4 = new G4UIcmdWithABool("/NaI/detector4/rotX",this); 
+  isRotx4->SetGuidance("Rotate the detector along X axis");
+  isRotx4->AvailableForStates(G4State_PreInit,G4State_Idle);
+  isRotx4->SetToBeBroadcasted(false);
+
+  isRoty4 = new G4UIcmdWithABool("/NaI/detector4/rotY",this);
+  isRoty4->SetGuidance("Rotate the detector along Y axis");
+  isRoty4->AvailableForStates(G4State_PreInit,G4State_Idle);
+  isRoty4->SetToBeBroadcasted(false);
+
+  isRotz4 = new G4UIcmdWithABool("/NaI/detector4/rotZ",this);
+  isRotz4->SetGuidance("Rotate the detector along Z axis");
+  isRotz4->AvailableForStates(G4State_PreInit,G4State_Idle);
+  isRotz4->SetToBeBroadcasted(false);
 
   // Pipe properties
   // Set directory to change the pipe properties
@@ -135,6 +195,10 @@ detectormessenger::~detectormessenger(){
   delete fpipe_box;
   delete isBox;
   delete isCyl;
+  delete isRotx1, delete isRoty1, delete isRotz1;
+  delete isRotx2, delete isRoty2, delete isRotz2;
+  delete isRotx3, delete isRoty3, delete isRotz3;
+  delete isRotx4, delete isRoty4, delete isRotz4;
 }
 
 void detectormessenger::SetNewValue(G4UIcommand* command, G4String newValue)
@@ -188,5 +252,56 @@ void detectormessenger::SetNewValue(G4UIcommand* command, G4String newValue)
   if( command == isCyl ){
     f_det->SetPipeCyl(isCyl->GetNewBoolValue(newValue));
   }
+
+  if( command == isRotx1 ){
+    f_det->Set_Rotate_X_NaI1(isRotx1->GetNewBoolValue(newValue));
+  }
+
+  if( command == isRoty1 ){
+    f_det->Set_Rotate_Y_NaI1(isRoty1->GetNewBoolValue(newValue));
+  }
+
+  if( command == isRotz1 ){
+    f_det->Set_Rotate_Z_NaI1(isRotz1->GetNewBoolValue(newValue));
+  }
+
+
+  if( command == isRotx2 ){
+    f_det->Set_Rotate_X_NaI2(isRotx2->GetNewBoolValue(newValue));
+  }
+
+  if( command == isRoty2 ){
+    f_det->Set_Rotate_Y_NaI2(isRoty2->GetNewBoolValue(newValue));
+  }
+
+  if( command == isRotz2 ){
+    f_det->Set_Rotate_Z_NaI2(isRotz2->GetNewBoolValue(newValue));
+  }
+
+  if( command == isRotx3 ){
+    f_det->Set_Rotate_X_NaI3(isRotx3->GetNewBoolValue(newValue));
+  }
+
+  if( command == isRoty3 ){
+    f_det->Set_Rotate_Y_NaI3(isRoty3->GetNewBoolValue(newValue));
+  }
+
+  if( command == isRotz3 ){
+    f_det->Set_Rotate_Z_NaI3(isRotz3->GetNewBoolValue(newValue));
+  }
+
+  if( command == isRotx4 ){
+    f_det->Set_Rotate_X_NaI4(isRotx4->GetNewBoolValue(newValue));
+  }
+
+  if( command == isRoty4 ){
+    f_det->Set_Rotate_Y_NaI4(isRoty4->GetNewBoolValue(newValue));
+  }
+
+  if( command == isRotz4 ){
+    f_det->Set_Rotate_Z_NaI4(isRotz4->GetNewBoolValue(newValue));
+  }
+
+
 }
 

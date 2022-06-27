@@ -133,6 +133,115 @@ void detectorconstruction::SetPipeBox(G4bool g1){
   G4RunManager::GetRunManager()->ReinitializeGeometry();
 }
 
+void detectorconstruction::Set_Rotate_X_NaI1(G4bool a){
+  isRotX_NaI1=a;
+  if (isRotX_NaI1==true){
+    isRotY_NaI1=false;
+    isRotZ_NaI1=false;
+
+  }
+}
+
+void detectorconstruction::Set_Rotate_Y_NaI1(G4bool a){
+  isRotY_NaI1=a;
+  if (isRotY_NaI1==true){
+    isRotX_NaI1=false;
+    isRotZ_NaI1=false;
+
+  }
+}
+
+void detectorconstruction::Set_Rotate_Z_NaI1(G4bool a){
+  isRotZ_NaI1=a;
+  if (isRotZ_NaI1==true){
+    isRotX_NaI1=false;
+    isRotZ_NaI1=false;
+
+  }
+}
+
+void detectorconstruction::Set_Rotate_X_NaI2(G4bool a){
+  isRotX_NaI2=a;
+  if (isRotX_NaI2==true){
+    isRotY_NaI2=false;
+    isRotZ_NaI2=false;
+
+  }
+}
+
+void detectorconstruction::Set_Rotate_Y_NaI2(G4bool a){
+  isRotY_NaI2=a;
+  if (isRotY_NaI2==true){
+    isRotX_NaI2=false;
+    isRotZ_NaI2=false;
+
+  }
+}
+
+void detectorconstruction::Set_Rotate_Z_NaI2(G4bool a){
+  isRotZ_NaI2=a;
+  if (isRotZ_NaI2==true){
+    isRotX_NaI2=false;
+    isRotZ_NaI2=false;
+
+  }
+}
+
+void detectorconstruction::Set_Rotate_X_NaI3(G4bool a){
+  isRotX_NaI3=a;
+  if (isRotX_NaI3==true){
+    isRotY_NaI3=false;
+    isRotZ_NaI3=false;
+
+  }
+}
+
+void detectorconstruction::Set_Rotate_Y_NaI3(G4bool a){
+  isRotY_NaI3=a;
+  if (isRotY_NaI3==true){
+    isRotX_NaI3=false;
+    isRotZ_NaI3=false;
+
+  }
+}
+
+void detectorconstruction::Set_Rotate_Z_NaI3(G4bool a){
+  isRotZ_NaI3=a;
+  if (isRotZ_NaI3==true){
+    isRotX_NaI3=false;
+    isRotZ_NaI3=false;
+
+  }
+}
+
+void detectorconstruction::Set_Rotate_X_NaI4(G4bool a){
+  isRotX_NaI4=a;
+  if (isRotX_NaI4==true){
+    isRotY_NaI4=false;
+    isRotZ_NaI4=false;
+
+  }
+}
+
+void detectorconstruction::Set_Rotate_Y_NaI4(G4bool a){
+  isRotY_NaI4=a;
+  if (isRotY_NaI4==true){
+    isRotX_NaI4=false;
+    isRotZ_NaI4=false;
+
+  }
+}
+
+void detectorconstruction::Set_Rotate_Z_NaI4(G4bool a){
+  isRotZ_NaI4=a;
+  if (isRotZ_NaI4==true){
+    isRotX_NaI4=false;
+    isRotZ_NaI4=false;
+
+  }
+}
+
+
 // define a function of materials
 
 void detectorconstruction::DefineMaterials(){
@@ -229,7 +338,11 @@ void detectorconstruction::ConstructNaI1()
 
     // define rotation matrix
     m_rot1= new G4RotationMatrix();
-    m_rot1->rotateY(ang1);
+    if (isRotX_NaI1==true){ m_rot1->rotateX(ang1);}
+    else if (isRotY_NaI1==true) { m_rot1->rotateY(ang1);}
+    else if (isRotZ_NaI1==true) { m_rot1->rotateZ(ang1);}
+
+    
 
     // define physical volume
     al_phys= new G4PVPlacement(m_rot1,                       //no rotation
@@ -298,265 +411,285 @@ void detectorconstruction::ConstructNaI1()
     fScoringVolume1=logic_nai1;
 }
 
+void detectorconstruction::ConstructNaI2() {
+  // SECOND DETECTOR
+    
+    // define aluminium layer
+  // define logic
+  G4ThreeVector pos5 = G4ThreeVector(posX2,posY2,posZ2);
+  
+  al_logic2= new G4LogicalVolume(al_solid,         //its solid
+                                                  al_mat,                 //its material
+                                                  "Aluminium_logic");         //its name
+  
+  // define rotation matrix
+  m_rot2= new G4RotationMatrix();
+
+  if (isRotX_NaI2==true){ m_rot2->rotateX(ang2);}
+  else if (isRotY_NaI2==true) { m_rot2->rotateY(ang2);}
+  else if (isRotZ_NaI2==true) { m_rot2->rotateZ(ang2);}
+  
+  // define physical volume
+  al_phys2= new G4PVPlacement(m_rot2,                       //no rotation
+                  pos5,                    //at position
+                  al_logic2,                //its logical volume
+                  "detector_2",              //its name
+                  logicWorld,                   //its mother  volume
+                  false,                   //no boolean operation
+                  0,                       //copy number
+                  true);          //overlaps checking
+                  
+  // define SiO2 layer
+  // define logic
+  si_logic2= new G4LogicalVolume(si_solid,         //its solid
+                                                  si_mat,                 //its material
+                                                "si_logic");         //its name
+          
+  // define physical volume
+  si_phys2= new G4PVPlacement(0,                       //no rotation
+                  pos2,                    //at position
+                  si_logic2,                //its logical volume
+                  "si_phys",              //its name
+                  al_logic2,                   //its mother  volume
+                  false,                   //no boolean operation
+                  0,                       //copy number
+                  true);          //overlaps checking
+                  
+  // define MgO layer
+  // define logic
+  mg_logic2= new G4LogicalVolume(mg_solid,         //its solid
+                                                  mg_mat,                 //its material
+                                                "mg_logic");         //its name
+  // define physical volume
+  mg_phys2=new G4PVPlacement(0,                       //no rotation
+                  pos3,                    //at position
+                  mg_logic2,                //its logical volume
+                  "mg_phys",              //its name
+                  al_logic2,                   //its mother  volume
+                  false,                   //no boolean operation
+                  0,                       //copy number
+                  true);          //overlaps checking
+
+  logic_nai2 =  new G4LogicalVolume(na_solid,         //its solid
+                      na_mat,                 //its material
+                      "na_logic");         //its name
+              
+  na_phys2= new G4PVPlacement(0,                       //no rotation
+                    pos4,                    //at position
+                  logic_nai2,             //its logical volume
+                  "na_phys2",              //its name
+                  mg_logic2,              //its mother  volume
+                  false,                   //no boolean operation
+                  0,                       //copy number
+                  true);          //overlaps checking
+  
+  fScoringVolume2=logic_nai2;
+}
+
+void detectorconstruction::ConstructNaI3(){
+// THIRD DETECTOR
+    
+  // define aluminium layer
+  // define logic
+  G4ThreeVector pos6 = G4ThreeVector(posX3,posY3,posZ3);
+  
+  al_logic3= new G4LogicalVolume(al_solid,         //its solid
+                                                  al_mat,                 //its material
+                                                  "Aluminium_logic");         //its name
+  
+  // define rotation matrix
+  m_rot3= new G4RotationMatrix();
+
+  if (isRotX_NaI3==true){ m_rot3->rotateX(ang3);}
+  else if (isRotY_NaI3==true) { m_rot3->rotateY(ang3);}
+  else if (isRotZ_NaI3==true) { m_rot3->rotateZ(ang3);}
+  
+
+  // define physical volume
+  al_phys3= new G4PVPlacement(m_rot3,                       //no rotation
+                  pos6,                    //at position
+                  al_logic3,                //its logical volume
+                  "detector_3",              //its name
+                  logicWorld,                   //its mother  volume
+                  false,                   //no boolean operation
+                  0,                       //copy number
+                  true);          //overlaps checking
+                  
+  // define SiO2 layer
+  // define logic
+  si_logic3= new G4LogicalVolume(si_solid,         //its solid
+                                                  si_mat,                 //its material
+                                                "si_logic");         //its name
+          
+  // define physical volume
+  si_phys3 = new G4PVPlacement(0,                       //no rotation
+                  pos2,                    //at position
+                  si_logic3,                //its logical volume
+                  "si_phys",              //its name
+                  al_logic3,                   //its mother  volume
+                  false,                   //no boolean operation
+                  0,                       //copy number
+                  true);          //overlaps checking
+                  
+  // define MgO layer
+  // define logic
+  mg_logic3= new G4LogicalVolume(mg_solid,         //its solid
+                                                  mg_mat,                 //its material
+                                                "mg_logic");         //its name
+  // define physical volume
+  mg_phys3= new G4PVPlacement(0,                       //no rotation
+                  pos3,                    //at position
+                  mg_logic3,                //its logical volume
+                  "mg_phys",              //its name
+                  al_logic3,                   //its mother  volume
+                  false,                   //no boolean operation
+                  0,                       //copy number
+                  true);          //overlaps checking
+
+  logic_nai3 =  new G4LogicalVolume(na_solid,         //its solid
+                      na_mat,                 //its material
+                      "na_logic");         //its name
+              
+  na_phys3= new G4PVPlacement(0,                       //no rotation
+                    pos4,                    //at position
+                  logic_nai3,             //its logical volume
+                  "na_phys2",              //its name
+                  mg_logic3,              //its mother  volume
+                  false,                   //no boolean operation
+                  0,                       //copy number
+                  true);          //overlaps checking
+  
+  fScoringVolume3=logic_nai3;
+}
+
+void detectorconstruction::ConstructNaI4(){
+// FOURTH DETECTOR
+  
+  // define aluminium layer
+  // define logic
+  G4ThreeVector pos7 = G4ThreeVector(posX4,posY4,posZ4);
+  
+  al_logic4= new G4LogicalVolume(al_solid,         //its solid
+                                                  al_mat,                 //its material
+                                                  "Aluminium_logic");         //its name
+  
+  // define rotation matrix
+  m_rot4= new G4RotationMatrix();
+  if (isRotX_NaI4==true){ m_rot4->rotateX(ang4);}
+  else if (isRotY_NaI4==true) { m_rot4->rotateY(ang4);}
+  else if (isRotZ_NaI4==true) { m_rot4->rotateZ(ang4);}
+  
+  
+  // define physical volume
+  al_phys4= new G4PVPlacement(m_rot4,                       //no rotation
+                  pos7,                    //at position
+                  al_logic4,                //its logical volume
+                  "detector_4",              //its name
+                  logicWorld,                   //its mother  volume
+                  false,                   //no boolean operation
+                  0,                       //copy number
+                  true);          //overlaps checking
+                  
+  // define SiO2 layer
+  // define logic
+  si_logic4= new G4LogicalVolume(si_solid,         //its solid
+                                                  si_mat,                 //its material
+                                                "si_logic");         //its name
+          
+  // define physical volume
+  si_phys4= new G4PVPlacement(0,                       //no rotation
+                  pos2,                    //at position
+                  si_logic4,                //its logical volume
+                  "si_phys",              //its name
+                  al_logic4,                   //its mother  volume
+                  false,                   //no boolean operation
+                  0,                       //copy number
+                  true);          //overlaps checking
+                  
+  // define MgO layer
+  // define logic
+  mg_logic4= new G4LogicalVolume(mg_solid,         //its solid
+                                                  mg_mat,                 //its material
+                                                "mg_logic");         //its name
+  // define physical volume
+  mg_phys4= new G4PVPlacement(0,                       //no rotation
+                  pos3,                    //at position
+                  mg_logic4,                //its logical volume
+                  "mg_phys",              //its name
+                  al_logic4,                   //its mother  volume
+                  false,                   //no boolean operation
+                  0,                       //copy number
+                  true);          //overlaps checking
+
+  logic_nai4 =  new G4LogicalVolume(na_solid,         //its solid
+                      na_mat,                 //its material
+                      "na_logic");         //its name
+              
+  na_phys4= new G4PVPlacement(0,                       //no rotation
+                    pos4,                    //at position
+                  logic_nai4,             //its logical volume
+                  "na_phys2",              //its name
+                  mg_logic4,              //its mother  volume
+                  false,                   //no boolean operation
+                  0,                       //copy number
+                  true);          //overlaps checking
+  
+  fScoringVolume4=logic_nai4;
+}
+
 // add properties and volumenes
 G4VPhysicalVolume* detectorconstruction::Construct()
 {
-    // define the world 
-    // define the size
-    G4double long_x1= 1*m;
-    G4double long_y1= 1*m;
-    G4double long_z1= 1*m;
-    
-    
-    // define world solid
-    solidWorld =    
-    new G4Box("World",                       //its name
-        long_x1, long_y1, long_z1);           //its size
-    // define world logic
-    logicWorld =                         
-    new G4LogicalVolume(solidWorld,          //its solid
-                        air,           //its material
-                        "World");            //its name
-                                    
-    // define physics solid
-    physWorld = 
-    new G4PVPlacement(0,                     //no rotation
-                      G4ThreeVector(),       //at (0,0,0)
-                      logicWorld,            //its logical volume
-                      "World",               //its name
-                      0,                     //its mother  volume
-                      false,                 //no boolean operation
-                      0,                     //copy number
-                      true);        //overlaps checking
-                     
-    // DEFINE PIPE LINE
-    
-    if (isPipeBox==true){
-      ConstructBoxPipe();
-    }
-
-    if (isPipeCylinder==true){
-      ConstructCylinderPipe();
-    }
-
-    // DEFINE DETECTORS GEOMETRIES
-
-
-    // FIRST DETECTOR
-    ConstructNaI1();
-   
-    // SECOND DETECTOR
-    
-     // define aluminium layer
-    // define logic
-    G4ThreeVector pos5 = G4ThreeVector(posX2,posY2,posZ2);
-    
-    al_logic2= new G4LogicalVolume(al_solid,         //its solid
-                                                    al_mat,                 //its material
-                                                    "Aluminium_logic");         //its name
-    
-    // define rotation matrix
-    m_rot2= new G4RotationMatrix();
-    m_rot2->rotateY(ang2);
-    
-    // define physical volume
-    al_phys2= new G4PVPlacement(m_rot2,                       //no rotation
-                    pos5,                    //at position
-                    al_logic2,                //its logical volume
-                    "detector_2",              //its name
-                    logicWorld,                   //its mother  volume
-                    false,                   //no boolean operation
-                    0,                       //copy number
-                    true);          //overlaps checking
+  // define the world 
+  // define the size
+  G4double long_x1= 1*m;
+  G4double long_y1= 1*m;
+  G4double long_z1= 1*m;
+  
+  
+  // define world solid
+  solidWorld =    
+  new G4Box("World",                       //its name
+      long_x1, long_y1, long_z1);           //its size
+  // define world logic
+  logicWorld =                         
+  new G4LogicalVolume(solidWorld,          //its solid
+                      air,           //its material
+                      "World");            //its name
+                                  
+  // define physics solid
+  physWorld = 
+  new G4PVPlacement(0,                     //no rotation
+                    G4ThreeVector(),       //at (0,0,0)
+                    logicWorld,            //its logical volume
+                    "World",               //its name
+                    0,                     //its mother  volume
+                    false,                 //no boolean operation
+                    0,                     //copy number
+                    true);        //overlaps checking
                     
-    // define SiO2 layer
-    // define logic
-    si_logic2= new G4LogicalVolume(si_solid,         //its solid
-                                                    si_mat,                 //its material
-                                                  "si_logic");         //its name
-            
-    // define physical volume
-    si_phys2= new G4PVPlacement(0,                       //no rotation
-                    pos2,                    //at position
-                    si_logic2,                //its logical volume
-                    "si_phys",              //its name
-                    al_logic2,                   //its mother  volume
-                    false,                   //no boolean operation
-                    0,                       //copy number
-                    true);          //overlaps checking
-                    
-    // define MgO layer
-    // define logic
-    mg_logic2= new G4LogicalVolume(mg_solid,         //its solid
-                                                    mg_mat,                 //its material
-                                                  "mg_logic");         //its name
-    // define physical volume
-    mg_phys2=new G4PVPlacement(0,                       //no rotation
-                    pos3,                    //at position
-                    mg_logic2,                //its logical volume
-                    "mg_phys",              //its name
-                    al_logic2,                   //its mother  volume
-                    false,                   //no boolean operation
-                    0,                       //copy number
-                    true);          //overlaps checking
+  // DEFINE PIPE LINE
+  
+  if (isPipeBox==true){
+    ConstructBoxPipe();
+  }
 
-    logic_nai2 =  new G4LogicalVolume(na_solid,         //its solid
-                        na_mat,                 //its material
-                        "na_logic");         //its name
-               
-    na_phys2= new G4PVPlacement(0,                       //no rotation
-                     pos4,                    //at position
-                    logic_nai2,             //its logical volume
-                    "na_phys2",              //its name
-                    mg_logic2,              //its mother  volume
-                    false,                   //no boolean operation
-                    0,                       //copy number
-                    true);          //overlaps checking
-    
-    fScoringVolume2=logic_nai2;
+  if (isPipeCylinder==true){
+    ConstructCylinderPipe();
+  }
+
+  // DEFINE DETECTORS GEOMETRIES
 
 
-    // THIRD DETECTOR
-    
-     // define aluminium layer
-    // define logic
-    G4ThreeVector pos6 = G4ThreeVector(posX3,posY3,posZ3);
-    
-    al_logic3= new G4LogicalVolume(al_solid,         //its solid
-                                                    al_mat,                 //its material
-                                                    "Aluminium_logic");         //its name
-    
-    // define rotation matrix
-    m_rot3= new G4RotationMatrix();
-    m_rot3->rotateY(ang3);
-    
+  // FIRST DETECTOR
+  ConstructNaI1();
+  // SECOND DETECTOR
+  ConstructNaI2();
+  // THIRD DETECTOR
+  ConstructNaI3();
+  // FOURTH DETECTOR
+  ConstructNaI4();
 
-    // define physical volume
-    al_phys3= new G4PVPlacement(m_rot3,                       //no rotation
-                    pos6,                    //at position
-                    al_logic3,                //its logical volume
-                    "detector_3",              //its name
-                    logicWorld,                   //its mother  volume
-                    false,                   //no boolean operation
-                    0,                       //copy number
-                    true);          //overlaps checking
-                    
-    // define SiO2 layer
-    // define logic
-    si_logic3= new G4LogicalVolume(si_solid,         //its solid
-                                                    si_mat,                 //its material
-                                                  "si_logic");         //its name
-            
-    // define physical volume
-    si_phys3 = new G4PVPlacement(0,                       //no rotation
-                    pos2,                    //at position
-                    si_logic3,                //its logical volume
-                    "si_phys",              //its name
-                    al_logic3,                   //its mother  volume
-                    false,                   //no boolean operation
-                    0,                       //copy number
-                    true);          //overlaps checking
-                    
-    // define MgO layer
-    // define logic
-    mg_logic3= new G4LogicalVolume(mg_solid,         //its solid
-                                                    mg_mat,                 //its material
-                                                  "mg_logic");         //its name
-    // define physical volume
-    mg_phys3= new G4PVPlacement(0,                       //no rotation
-                    pos3,                    //at position
-                    mg_logic3,                //its logical volume
-                    "mg_phys",              //its name
-                    al_logic3,                   //its mother  volume
-                    false,                   //no boolean operation
-                    0,                       //copy number
-                    true);          //overlaps checking
-
-    logic_nai3 =  new G4LogicalVolume(na_solid,         //its solid
-                        na_mat,                 //its material
-                        "na_logic");         //its name
-               
-    na_phys3= new G4PVPlacement(0,                       //no rotation
-                     pos4,                    //at position
-                    logic_nai3,             //its logical volume
-                    "na_phys2",              //its name
-                    mg_logic3,              //its mother  volume
-                    false,                   //no boolean operation
-                    0,                       //copy number
-                    true);          //overlaps checking
-    
-    fScoringVolume3=logic_nai3;
-
-    // FOURTH DETECTOR
-    
-    // define aluminium layer
-    // define logic
-    G4ThreeVector pos7 = G4ThreeVector(posX4,posY4,posZ4);
-    
-    al_logic4= new G4LogicalVolume(al_solid,         //its solid
-                                                    al_mat,                 //its material
-                                                    "Aluminium_logic");         //its name
-    
-    // define rotation matrix
-    m_rot4= new G4RotationMatrix();
-    m_rot4->rotateY(ang4);
-    
-    
-    // define physical volume
-    al_phys4= new G4PVPlacement(m_rot4,                       //no rotation
-                    pos7,                    //at position
-                    al_logic4,                //its logical volume
-                    "detector_4",              //its name
-                    logicWorld,                   //its mother  volume
-                    false,                   //no boolean operation
-                    0,                       //copy number
-                    true);          //overlaps checking
-                    
-    // define SiO2 layer
-    // define logic
-    si_logic4= new G4LogicalVolume(si_solid,         //its solid
-                                                    si_mat,                 //its material
-                                                  "si_logic");         //its name
-            
-    // define physical volume
-    si_phys4= new G4PVPlacement(0,                       //no rotation
-                    pos2,                    //at position
-                    si_logic4,                //its logical volume
-                    "si_phys",              //its name
-                    al_logic4,                   //its mother  volume
-                    false,                   //no boolean operation
-                    0,                       //copy number
-                    true);          //overlaps checking
-                    
-    // define MgO layer
-    // define logic
-    mg_logic4= new G4LogicalVolume(mg_solid,         //its solid
-                                                    mg_mat,                 //its material
-                                                  "mg_logic");         //its name
-    // define physical volume
-    mg_phys4= new G4PVPlacement(0,                       //no rotation
-                    pos3,                    //at position
-                    mg_logic4,                //its logical volume
-                    "mg_phys",              //its name
-                    al_logic4,                   //its mother  volume
-                    false,                   //no boolean operation
-                    0,                       //copy number
-                    true);          //overlaps checking
-
-    logic_nai4 =  new G4LogicalVolume(na_solid,         //its solid
-                        na_mat,                 //its material
-                        "na_logic");         //its name
-               
-    na_phys4= new G4PVPlacement(0,                       //no rotation
-                     pos4,                    //at position
-                    logic_nai4,             //its logical volume
-                    "na_phys2",              //its name
-                    mg_logic4,              //its mother  volume
-                    false,                   //no boolean operation
-                    0,                       //copy number
-                    true);          //overlaps checking
-    
-    fScoringVolume4=logic_nai4;
 
   // VISUALIZATION ATRIBUTES
 
@@ -605,10 +738,5 @@ G4VPhysicalVolume* detectorconstruction::Construct()
   si_logic4->SetVisAttributes(dt4_VisAtt);
   mg_logic4->SetVisAttributes(dt4_VisAtt);
     
-  
-  
   return physWorld;
 }
-
-
-
