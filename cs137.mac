@@ -12,11 +12,20 @@
 /NaI/detector4/rotZ true
 /pipe/box/activate true
 /pipe/box/dim 50 10 10 cm
-/vis/scene/add/axes
+/process/verbose 0
+/run/verbose 0
+/event/verbose 0
+/tracking/verbose 0
+/process/em/verbose 0
+/vis/verbose 0
+/control/cout/useBuffer 1
+/control/cout/ignoreInitializationCout 1
+/process/eLoss/verbose 0
+/control/verbose 0
 /run/numberOfThreads 6
 /run/initialize 
 /gps/particle ion
 /gps/ion 55 137
 /gps/pos/centre 0 0 0 cm
-/run/beamOn 10
+/run/beamOn 10000
 
