@@ -1,0 +1,30 @@
+/NaI/detector1/dimensions -40 0 -20 cm 
+/NaI/detector1/angle 90 deg 
+/NaI/detector1/rotZ true 
+/NaI/detector2/dimensions -20 -20 0 cm 
+/NaI/detector2/angle 90 deg 
+/NaI/detector2/rotX true 
+/NaI/detector3/dimensions 20 0 20 cm 
+/NaI/detector3/angle 180 deg 
+/NaI/detector3/rotY true 
+/NaI/detector4/dimensions 40 0 -20 cm 
+/NaI/detector4/angle 90 deg 
+/NaI/detector4/rotZ true 
+/pipe/box/activate true
+/pipe/box/dim 50 10 10 cm 
+/process/verbose 0 
+/run/verbose 0 
+/event/verbose 0 
+/tracking/verbose 0 
+/process/em/verbose 0 
+/vis/verbose 0 
+/process/eLoss/verbose 0 
+/control/verbose 0 
+/run/numberOfThreads 100 
+/run/initialize 
+/gps/particle gamma 
+/gps/energy 662 keV 
+/gps/pos/type Point 
+/gps/ang/type iso 
+/gps/pos/centre 0.25628 0.12186 0.07255 m
+/run/beamOn 1000000 
