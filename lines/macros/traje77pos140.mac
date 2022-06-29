@@ -20,11 +20,12 @@
 /vis/verbose 0 
 /process/eLoss/verbose 0 
 /control/verbose 0 
+/control/cout/useBuffer 1 
 /run/numberOfThreads 100 
 /run/initialize 
 /gps/particle gamma 
 /gps/energy 662 keV 
 /gps/pos/type Point 
 /gps/ang/type iso 
-/gps/pos/centre 0.69849 0.16602 0.06416 m
+/gps/pos/centre 0.19849000000000006 0.048229999999999995 -0.020680000000000004 m
 /run/beamOn 1000000 
