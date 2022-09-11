@@ -140,13 +140,6 @@ for the Nuclear Science Department  (DCN) in the Escuela Politécnica Nacional (
  - [EPN](https://www.epn.edu.ec/)
 
 
-## 🚀 About Me
-I'm a Sebastian Sarasti Zambonino. I studied a bachelor's degree in Chemical Engineering
-with a technical specialization in Nuclear Applications.
-All my research is focused on Monte-Carlo simulations, Radioactive Particle Tracking, and implementations 
-of machine learning algorithms in radiation detection.
-
-
 ## Contacts:
 
 - [Twitter](https://twitter.com/sarasti_seb)
